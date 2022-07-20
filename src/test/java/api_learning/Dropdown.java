@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import support.ui.SelectEx;
 import url.Urls;
 
 public class Dropdown implements Urls {
@@ -23,10 +24,10 @@ public class Dropdown implements Urls {
             WebElement dropdownElem = driver.findElement(dropdownSel);
 
             // Select dropdown
-            Select select = new Select(dropdownElem);
+            SelectEx select = new SelectEx(dropdownElem);
 
             // Select by visible text | Option 1
-            select.selectByVisibleText("Option 1");
+            select.selectOption1();
 
             // Select by Index
             select.selectByIndex(2);
