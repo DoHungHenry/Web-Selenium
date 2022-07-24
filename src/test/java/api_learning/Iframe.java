@@ -17,11 +17,24 @@ public class Iframe implements Urls {
             // Navigate to target page
             driver.get(baseUrl.concat(iframeUrlSlug));
 
-            // Define Selector value
-            By iframeSel = By.cssSelector("#tinymce p");
+            // Locate iframe
+            By iframeSel = By.cssSelector("[id$='ifr']");
+            WebElement iframeElem = driver.findElement(iframeSel);
 
-            // Find Element: if element is not located NoSuchElementException thrown
-            driver.findElement(iframeSel).sendKeys("abcd");
+            // Switch to iframe
+            driver.switchTo().frame(iframeElem);
+
+            // Locate element inside iframe
+            WebElement editorInputElem = driver.findElement(By.id("tinymce"));
+            editorInputElem.click();
+            editorInputElem.clear();
+            editorInputElem.sendKeys("new text");
+            Thread.sleep(1000);
+
+            // If we want to handle element outside of iframe, we need to switch back to outside of iframe first
+            driver.switchTo().defaultContent();
+            driver.findElement(By.linkText("Elemental Selenium")).click();
+            Thread.sleep(1000);
 
             // Interaction
 
