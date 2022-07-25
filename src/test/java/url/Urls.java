@@ -6,4 +6,5 @@ public interface Urls {
     String dropdownUrlSlug = "/dropdown";
     String iframeUrlSlug = "/iframe";
     String hoverUrlSlug = "/hovers";
+    String javascriptAlertUrlSlug = "/javascript_alerts";
 }
