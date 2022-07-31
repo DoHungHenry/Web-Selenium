@@ -26,34 +26,17 @@ public class JSAlerts implements Urls {
         try {
             // Navigate to target page
             driver.get(baseUrl.concat(javascriptAlertUrlSlug));
-            WebElement triggerAlertBtnElem;
-
-            Alert alert;
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
             // JS Alert | click on OK
-            triggerAlertBtnElem = driver.findElement(jsAlertSel);
-            triggerAlertBtnElem.click();
-            alert = wait.until(ExpectedConditions.alertIsPresent());
-            System.out.println("Alert content is: " + alert.getText());
-            alert.accept();
+            handleAlert(driver, jsAlertSel, true);
             System.out.println("Result is: " + driver.findElement(resultSel).getText());
 
             // JS Confirm | click on Cancel
-            triggerAlertBtnElem = driver.findElement(jsConfirmSel);
-            triggerAlertBtnElem.click();
-            alert = wait.until(ExpectedConditions.alertIsPresent());
-            System.out.println("Alert content is: " + alert.getText());
-            alert.dismiss();
+            handleAlert(driver, jsConfirmSel, false);
             System.out.println("Result is: " + driver.findElement(resultSel).getText());
 
             // JS Prompt
-            triggerAlertBtnElem = driver.findElement(jsPromptSel);
-            triggerAlertBtnElem.click();
-            alert = wait.until(ExpectedConditions.alertIsPresent());
-            System.out.println("Alert content is: " + alert.getText());
-            alert.sendKeys("I am a JS prompt");
-            alert.accept();
+            handleAlert(driver, jsPromptSel, "I am ABC");
             System.out.println("Result is: " + driver.findElement(resultSel).getText());
 
         } catch (Exception e) {
@@ -62,5 +45,25 @@ public class JSAlerts implements Urls {
 
         // Quit browser
         driver.quit();
+    }
+
+    public static void handleAlert(WebDriver driver, By triggerAlertSel, boolean isAccepting){
+        Alert alert = getAlert(driver, triggerAlertSel);
+        System.out.println("Alert content is: " + alert.getText());
+        if (isAccepting) alert.accept();
+        else alert.dismiss();
+    }
+    public static void handleAlert(WebDriver driver, By triggerAlertSel, String content){
+        Alert alert = getAlert(driver, triggerAlertSel);
+        System.out.println("Alert content is: " + alert.getText());
+        alert.sendKeys(content);
+        alert.accept();
+    }
+
+    private static Alert getAlert(WebDriver driver, By triggerAlertSel){
+        WebElement triggerAlertBtnElem = driver.findElement(triggerAlertSel);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        triggerAlertBtnElem.click();
+        return wait.until(ExpectedConditions.alertIsPresent());
     }
 }
