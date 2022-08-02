@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.ui.SelectEx;
+import support.ui.WaitMoreThanOneTab;
 import url.Urls;
 
 import java.time.Duration;
@@ -28,7 +29,9 @@ public class ExplicitWait implements Urls {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 //            wait.until(ExpectedConditions.visibilityOfElementLocated(xSel));
 
-            wait.until(ExpectedConditions.visibilityOf(driver.findElement(xSel)));
+//            wait.until(ExpectedConditions.visibilityOf(driver.findElement(xSel)));
+
+            wait.until(new WaitMoreThanOneTab());
 
 
         } catch (Exception e) {
