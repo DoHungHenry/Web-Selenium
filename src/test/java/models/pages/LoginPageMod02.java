@@ -5,26 +5,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 // Page Object model type 1
-public class LoginPage {
+public class LoginPageMod02 {
 
     private final WebDriver driver;
     private final static By usernameSel = By.id("username");
     private final static By passwordSel = By.cssSelector("#password");
     private final static By loginBtnSel = By.cssSelector("[type='submit']");
 
-    public LoginPage(WebDriver driver) {
+    public LoginPageMod02(WebDriver driver) {
         this.driver = driver;
     }
 
-    public WebElement username(){
-        return driver.findElement(usernameSel);
+    public void inputUsername(String username){
+        driver.findElement(usernameSel).sendKeys(username);
     }
 
-    public WebElement password(){
-        return driver.findElement(passwordSel);
+    public void inputPassword(String password){
+        driver.findElement(passwordSel).sendKeys(password);
     }
 
-    public WebElement loginBtn(){
-        return driver.findElement(loginBtnSel);
+    public void clickLoginBtn(){
+        driver.findElement(loginBtnSel).click();
     }
 }
