@@ -37,7 +37,7 @@ public class DriverFactory {
         WebDriver driver = new ChromeDriver(chromeOptions);
 
         // Interval time: 500 mili seconds
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 
         return driver;
     }

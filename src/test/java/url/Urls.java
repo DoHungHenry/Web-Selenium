@@ -8,4 +8,6 @@ public interface Urls {
     String iframeUrlSlug = "/iframe";
     String hoverUrlSlug = "/hovers";
     String javascriptAlertUrlSlug = "/javascript_alerts";
+    String dynamicControlUrlSlug = "/dynamic_controls";
+
 }
