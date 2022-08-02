@@ -26,7 +26,9 @@ public class ExplicitWait implements Urls {
             By xSel = By.cssSelector("#teo");
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(xSel));
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(xSel));
+
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(xSel)));
 
 
         } catch (Exception e) {
