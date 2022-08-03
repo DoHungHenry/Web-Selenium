@@ -8,11 +8,11 @@ import java.lang.reflect.Constructor;
 public class ComponentExploring {
 
     public <T extends LoginPage> void login(Class<T> loginPageClass){
-        Class<?>[] parameters = new Class[]{WebDriver.class};
+        Class<?>[] parameters = new Class[]{};
 
         try {
             Constructor<T> constructor = loginPageClass.getConstructor(parameters);
-            T loginPageObj = constructor.newInstance(DriverFactory.getChromeDriver());
+            T loginPageObj = constructor.newInstance();
             loginPageObj.login();
         } catch (Exception e){
             e.printStackTrace();

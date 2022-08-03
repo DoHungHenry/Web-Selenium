@@ -12,10 +12,6 @@ public abstract class LoginPage {
         System.out.println(loginBtn());
     }
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
     public void verifyLoginSuccess() {
         System.out.println("Verifying Dashboard display");
     }
