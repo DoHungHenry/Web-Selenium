@@ -1,15 +1,18 @@
 package models.components;
 
+import driver.DriverFactory;
+import org.openqa.selenium.WebDriver;
+
 import java.lang.reflect.Constructor;
 
 public class ComponentExploring {
 
     public <T extends LoginPage> void login(Class<T> loginPageClass){
-        Class<?>[] parameters = new Class[]{};
+        Class<?>[] parameters = new Class[]{WebDriver.class};
 
         try {
             Constructor<T> constructor = loginPageClass.getConstructor(parameters);
-            T loginPageObj = constructor.newInstance();
+            T loginPageObj = constructor.newInstance(DriverFactory.getChromeDriver());
             loginPageObj.login();
         } catch (Exception e){
             e.printStackTrace();
