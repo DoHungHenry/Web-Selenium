@@ -3,6 +3,7 @@ package url;
 public interface Urls {
 
     String baseUrl = "https://the-internet.herokuapp.com";
+    String demoBaseUrl = "http://demowebshop.tricentis.com/";
     String loginUrlSlug = "/login";
     String dropdownUrlSlug = "/dropdown";
     String iframeUrlSlug = "/iframe";
