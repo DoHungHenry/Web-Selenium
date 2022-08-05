@@ -36,15 +36,15 @@ public class Component {
     }
 
     public <T extends Component> List<T> findComponents(Class<T> componentClass, WebDriver driver){
-        String cssSelector;
+        By componentSelector;
 
         try {
-            cssSelector = componentClass.getAnnotation(ComponentCssSelector.class).value();
+            componentSelector = getCompSelector(componentClass);
         } catch (Exception e){
             throw new IllegalArgumentException("[Err] The component must have css selector!");
         }
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(cssSelector)));
-        List<WebElement> results = component.findElements(By.cssSelector(cssSelector));
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(componentSelector));
+        List<WebElement> results = component.findElements(componentSelector);
 
         // Define component class constructor params
         Class<?>[] params = new Class[]{WebDriver.class, WebElement.class};
@@ -67,5 +67,23 @@ public class Component {
         }).collect(Collectors.toList());
 
         return components;
+    }
+    
+    private By getCompSelector(Class<? extends Component> compClass){
+        if (compClass.isAnnotationPresent(ComponentCssSelector.class)){
+            return By.cssSelector(compClass.getAnnotation(ComponentCssSelector.class).value());
+        } else if (compClass.isAnnotationPresent(ComponentXpathSelector.class)) {
+            return By.xpath(compClass.getAnnotation(ComponentXpathSelector.class).value());
+        } else if (compClass.isAnnotationPresent(ComponentClassSelector.class)){
+            return By.className(compClass.getAnnotation(ComponentClassSelector.class).value());
+        } else if (compClass.isAnnotationPresent(ComponentIdSelector.class)){
+            return By.id(compClass.getAnnotation(ComponentIdSelector.class).value());
+        } else {
+            throw new IllegalArgumentException("Component class " + compClass + " must have annotation "
+            + ComponentClassSelector.class.getSimpleName() + " or "
+            + ComponentXpathSelector.class.getSimpleName() + " or "
+            + ComponentClassSelector.class.getSimpleName() + " or "
+            + ComponentIdSelector.class.getSimpleName());
+        }
     }
 }
