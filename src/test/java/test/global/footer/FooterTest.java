@@ -6,48 +6,59 @@ import models.components.global.footer.FooterColumnComponent;
 import models.components.global.footer.InformationColumnComponent;
 import models.pages.HomePage;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
 import url.Urls;
 
 public class FooterTest {
 
-    public static void main(String[] args) {
-        WebDriver driver = DriverFactory.getChromeDriver();
+//    public static void main(String[] args) {
+//        WebDriver driver = DriverFactory.getChromeDriver();
+//
+//        try {
+//            testFooterHomePage(driver);
+//            testFooterCategoryPage(driver);
+//            testFooterRegisterPage(driver);
+//            testFooterLoginPage(driver);
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        driver.quit();
+//    }
 
+    @Test
+    public void testFooterHomePage(WebDriver driver) {
+        driver.get(Urls.demoBaseUrl);
         try {
-            testFooterHomePage(driver);
-            testFooterCategoryPage(driver);
-            testFooterRegisterPage(driver);
-            testFooterLoginPage(driver);
-        } catch (Exception e){
-            e.printStackTrace();
+            HomePage homePage = new HomePage(driver);
+            InformationColumnComponent informationColumnComp =
+                    homePage.footerComp().informationColumnComp();
+
+            CustomerServiceColumnComponent customerServiceColumnComp =
+                    homePage.footerComp().customerServiceColumnComp();
+
+            testFooterColumn(informationColumnComp);
+            testFooterColumn(customerServiceColumnComp);
+        } catch (Exception ignored){
+            ignored.printStackTrace();
         }
 
         driver.quit();
     }
 
-    private static void testFooterHomePage(WebDriver driver) {
-        driver.get(Urls.demoBaseUrl);
-        HomePage homePage = new HomePage(driver);
-        InformationColumnComponent informationColumnComp =
-                homePage.footerComp().informationColumnComp();
-
-        CustomerServiceColumnComponent customerServiceColumnComp =
-                homePage.footerComp().customerServiceColumnComp();
-
-        testFooterColumn(informationColumnComp);
-        testFooterColumn(customerServiceColumnComp);
+    @Test
+    public void testFooterCategoryPage(WebDriver driver) {
     }
 
-    private static void testFooterCategoryPage(WebDriver driver) {
+    @Test
+    public void testFooterRegisterPage(WebDriver driver) {
     }
 
-    private static void testFooterRegisterPage(WebDriver driver) {
+    @Test
+    public void testFooterLoginPage(WebDriver driver) {
     }
 
-    private static void testFooterLoginPage(WebDriver driver) {
-    }
-
-    private static void testFooterColumn(FooterColumnComponent footerColumnComponent){
+    private void testFooterColumn(FooterColumnComponent footerColumnComponent){
         System.out.println(footerColumnComponent.headerElem().getText());
         footerColumnComponent.linksElem().forEach(link -> {
             System.out.println(link.getText());
