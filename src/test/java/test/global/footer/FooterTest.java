@@ -53,7 +53,13 @@ public class FooterTest {
 
     @Test(priority = 2)
     public void testFooterRegisterPage() {
-        throw new RuntimeException("Make this test method failed to prevent testFooterLoginPage method being performed");
+//        throw new RuntimeException("Make this test method failed to prevent testFooterLoginPage method being performed");
+        String expectedResult = "Expected text";
+        String actualResult = "Actual text";
+
+        if (!expectedResult.equals(actualResult)){
+            throw new AssertionError("Expected & actual is different");
+        }
     }
 
     @Test(priority = 1, dependsOnMethods = {"testFooterRegisterPage"})
