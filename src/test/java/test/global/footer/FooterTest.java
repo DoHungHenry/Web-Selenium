@@ -26,8 +26,9 @@ public class FooterTest {
 //        driver.quit();
 //    }
 
-    @Test
-    public void testFooterHomePage(WebDriver driver) {
+    @Test(priority = 4)
+    public void testFooterHomePage() {
+        WebDriver driver = DriverFactory.getChromeDriver();
         driver.get(Urls.demoBaseUrl);
         try {
             HomePage homePage = new HomePage(driver);
@@ -46,16 +47,17 @@ public class FooterTest {
         driver.quit();
     }
 
-    @Test
-    public void testFooterCategoryPage(WebDriver driver) {
+    @Test(priority = 3)
+    public void testFooterCategoryPage() {
+
     }
 
-    @Test
-    public void testFooterRegisterPage(WebDriver driver) {
+    @Test(priority = 2)
+    public void testFooterRegisterPage() {
     }
 
-    @Test
-    public void testFooterLoginPage(WebDriver driver) {
+    @Test(priority = 1, dependsOnMethods = {"testFooterRegisterPage"})
+    public void testFooterLoginPage() {
     }
 
     private void testFooterColumn(FooterColumnComponent footerColumnComponent){
@@ -65,6 +67,4 @@ public class FooterTest {
             System.out.println(link.getAttribute("href"));
         });
     }
-
-
 }
