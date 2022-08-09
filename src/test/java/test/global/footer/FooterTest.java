@@ -8,6 +8,7 @@ import models.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import support.verification.Verifier;
 import url.Urls;
 
@@ -51,6 +52,15 @@ public class FooterTest {
 
     @Test(priority = 3)
     public void testFooterCategoryPage() {
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(1,2);
+        softAssert.assertEquals(true, true);
+        softAssert.assertEquals(1,3);
+
+        // collect all failed assertion between start point of soft assert & assertAll
+        softAssert.assertAll();
+
+        System.out.println("hello");
     }
 
     @Test(priority = 2)
