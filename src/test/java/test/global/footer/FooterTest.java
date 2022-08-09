@@ -63,7 +63,11 @@ public class FooterTest {
 //            throw new AssertionError("Expected & actual is different");
 //        }
 //        Verifier.verifyEquals(actualResult, expectedResult);
-        Assert.assertEquals(actualResult, expectedResult);
+        Assert.assertEquals(actualResult, expectedResult, "Customize Err message here");
+        Assert.assertTrue(actualResult.equals(expectedResult), "Customize Err message here");
+        Assert.assertFalse(actualResult.equals(expectedResult), "Customize Err message here");
+        Assert.fail(); // using example: when a method return an empty list, force this fail immediately without performing
+        Assert.fail("Customize Err message here");
     }
 
     @Test(priority = 1, dependsOnMethods = {"testFooterRegisterPage"})
