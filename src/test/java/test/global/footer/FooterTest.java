@@ -6,6 +6,7 @@ import models.components.global.footer.FooterColumnComponent;
 import models.components.global.footer.InformationColumnComponent;
 import models.pages.HomePage;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import support.verification.Verifier;
 import url.Urls;
@@ -61,7 +62,8 @@ public class FooterTest {
 //        if (!expectedResult.equals(actualResult)){
 //            throw new AssertionError("Expected & actual is different");
 //        }
-        Verifier.verifyEquals(actualResult, expectedResult);
+//        Verifier.verifyEquals(actualResult, expectedResult);
+        Assert.assertEquals(actualResult, expectedResult);
     }
 
     @Test(priority = 1, dependsOnMethods = {"testFooterRegisterPage"})
