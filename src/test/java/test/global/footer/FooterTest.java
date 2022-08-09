@@ -49,11 +49,11 @@ public class FooterTest {
 
     @Test(priority = 3)
     public void testFooterCategoryPage() {
-
     }
 
     @Test(priority = 2)
     public void testFooterRegisterPage() {
+        throw new RuntimeException("Make this test method failed to prevent testFooterLoginPage method being performed");
     }
 
     @Test(priority = 1, dependsOnMethods = {"testFooterRegisterPage"})
